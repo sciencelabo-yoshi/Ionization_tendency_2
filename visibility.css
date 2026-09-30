@@ -1,0 +1,306 @@
+.metal-tool{position:absolute;z-index:7;left:-1%;top:-3%;width:140px;height:410px;cursor:grab;touch-action:none;transition:left .55s ease,top .55s ease,transform .25s ease;user-select:none;transform:rotate(-7deg);transform-origin:50% 20px}
+.metal-tool:hover{filter:drop-shadow(0 6px 5px #0002)}
+.metal-tool.dragging{z-index:20;cursor:grabbing;transition:none;filter:drop-shadow(0 12px 9px #0004);transform:rotate(2deg) scale(1.02)}
+.metal-tool.placed{left:calc(38% - 70px);top:0;cursor:default;transform:rotate(0)}
+.metal-tool.auto-moving{animation:carry-and-dip 1.65s cubic-bezier(.35,.05,.2,1) forwards}
+.metal-tool .metal-plate{left:50%;top:132px;width:82px;height:270px;transform:translateX(-50%)}
+.metal-tool .metal-plate.out{top:132px}
+.tweezers{position:absolute;left:50%;top:0;width:118px;height:152px;transform:translateX(-50%);filter:drop-shadow(0 2px 2px #0003)}
+.tweezers:before{content:"";position:absolute;z-index:3;left:50%;top:0;transform:translateX(-50%);width:76px;height:44px;border:5px solid #616b6c;border-bottom:0;border-radius:28px 28px 8px 8px;background:linear-gradient(90deg,#8c9697,#e3e7e5 48%,#757f80)}
+.tweezers .arm{position:absolute;z-index:2;top:29px;width:11px;height:112px;background:linear-gradient(90deg,#5e6869,#edf0ee 48%,#697374);border:1px solid #535c5d;border-radius:5px;transform-origin:top}
+.tweezers .left-arm{left:27px;transform:rotate(-6deg)}.tweezers .right-arm{right:27px;transform:rotate(6deg)}
+.tweezers .jaw{position:absolute;z-index:4;top:126px;width:24px;height:18px;border:5px solid #555f60;background:#aab2b2}
+.tweezers .left-jaw{left:12px;border-radius:4px 0 0 8px;border-right:0}.tweezers .right-jaw{right:12px;border-radius:0 4px 8px 0;border-left:0}
+.tweezers b{position:absolute;z-index:5;left:50%;top:14px;transform:translateX(-50%);font-size:10px;color:#fff;text-shadow:0 1px #000;white-space:nowrap}
+.tweezers:before,.tweezers .arm,.tweezers .jaw{display:none}
+.tweezers-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.steel-body{fill:none;stroke:url(#steel);stroke-width:15;stroke-linecap:round;stroke-linejoin:round}
+.steel-shine{fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;opacity:.72}
+.grip-lines{fill:none;stroke:#414b4d;stroke-width:2.4;stroke-linecap:round;opacity:.8}
+.jaw-shape{fill:url(#steel);stroke:#465052;stroke-width:2;stroke-linejoin:round}
+@keyframes carry-and-dip{0%{left:-1%;top:-3%;transform:rotate(-9deg)}48%{left:calc(38% - 70px);top:-16%;transform:rotate(4deg)}68%{left:calc(38% - 70px);top:-16%;transform:rotate(0)}100%{left:calc(38% - 70px);top:0;transform:rotate(0)}}
+
+.solution-name{
+  left:auto;
+  right:12%;
+  transform:none;
+}
+
+#products{
+  position:absolute;
+  inset:0;
+  z-index:12;
+  pointer-events:none;
+}
+
+.product{
+  z-index:13;
+}
+
+.product.metal-ion{
+  animation-name:ion-emerge-visible;
+}
+
+.product.deposit{
+  box-shadow:inset 0 0 0 3px #fff9,0 0 0 4px #6b5a3a66,0 5px 12px #241b1055;
+}
+
+@keyframes ion-emerge-visible{
+  from{left:33%;top:45%;opacity:0;transform:translate(-50%,-50%) scale(.55)}
+  to{left:51%;top:72%;opacity:1;transform:translate(-50%,-50%) scale(1)}
+}
+
+.product.bubble{animation-name:bubble-visible}
+@keyframes bubble-visible{
+  from{left:34%;top:62%;opacity:.75}
+  to{left:43%;top:18%;opacity:0}
+}
+
+@media(max-width:700px){
+  .metal-tool.placed{left:calc(35% - 70px)}
+  .metal-tool .metal-plate{width:72px}
+  .solution-name{right:5%}
+}
+
+.sequence-ion,.sequence-electron,.receiving-ion,.formed-atom{
+  position:absolute;z-index:16;display:grid;place-items:center;border-radius:50%;
+  transform:translate(-50%,-50%);font:900 13px monospace;pointer-events:none;
+}
+.sequence-ion{left:34%;top:58%;width:52px;height:52px;background:#d7dfe4;border:3px solid #778d99;color:#344d5b;animation:new-ion-out 1.2s ease-out forwards}
+.sequence-electron{left:34%;top:55%;width:35px;height:35px;background:#fff3a0;border:3px solid #c3910e;color:#654c00;box-shadow:0 0 14px #ffd93c;animation:electron-appear .55s ease-out forwards}
+.sequence-electron.e1{margin-left:-20px}.sequence-electron.e2{margin-left:20px;animation-delay:.18s}
+.receiving-ion{left:72%;top:67%;width:54px;height:54px;background:#bee6e7;border:3px solid #348e95;color:#175f65;animation:ion-to-electrons 1.4s ease-in forwards}
+.receiving-ion.h-one{top:59%;background:#facdc5;border-color:#dc6652;color:#8d281b}.receiving-ion.h-two{top:76%;background:#facdc5;border-color:#dc6652;color:#8d281b;animation-delay:.12s}
+.formed-atom{left:34%;top:60%;width:43px;height:43px;background:#efe8d8;border:3px solid #8c7f69;color:#544b3d;box-shadow:0 0 0 4px #fff9,0 5px 12px #241b1044;animation:atom-settle .65s ease-out forwards}
+.formed-atom.second{left:39%;top:69%;animation-delay:.12s}
+.sequence-caption{position:absolute;z-index:18;left:50%;bottom:5%;transform:translateX(-50%);padding:6px 11px;border-radius:99px;background:#fffde9e8;border:1px solid #aaa274;color:#4e4932;font-size:12px;font-weight:900;white-space:nowrap}
+@keyframes new-ion-out{from{left:34%;top:50%;opacity:.2;scale:.6}to{left:51%;top:72%;opacity:1;scale:1}}
+@keyframes electron-appear{from{opacity:0;scale:.3}to{opacity:1;scale:1}}
+.transfer .sequence-electron{animation:electron-consumed 1.4s .75s ease-in forwards}
+@keyframes electron-consumed{from{opacity:1;scale:1}to{opacity:0;scale:.25}}
+@keyframes ion-to-electrons{0%{left:72%;top:67%}75%{left:42%;top:60%;opacity:1}100%{left:35%;top:58%;opacity:0;scale:.55}}
+@keyframes atom-settle{from{opacity:0;scale:.4}to{opacity:1;scale:1}}
+
+/* 金属板そのものをつかんで動かす */
+.metal-tool{left:3%;top:7%;width:82px;height:270px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px #0002);cursor:default;pointer-events:none}
+.metal-tool.dragging{transform:rotate(2deg) scale(1.04)}
+.metal-tool.placed{left:calc(38% - 41px);top:23%;transform:rotate(0);filter:none}
+.metal-tool .metal-plate,.metal-tool .metal-plate.out{position:absolute;inset:0;width:100%;height:100%;transform:none}
+.metal-tool.auto-moving{animation:carry-metal-and-dip 1.45s cubic-bezier(.35,.05,.2,1) forwards}
+@keyframes carry-metal-and-dip{0%{left:3%;top:7%;transform:rotate(-5deg)}48%{left:calc(38% - 41px);top:4%;transform:rotate(3deg)}68%{left:calc(38% - 41px);top:4%;transform:rotate(0)}100%{left:calc(38% - 41px);top:23%;transform:rotate(0)}}
+@media(max-width:700px){.metal-tool.placed{left:calc(35% - 36px)}.metal-tool{width:72px}.metal-tool.auto-moving{animation-name:carry-metal-and-dip-mobile}@keyframes carry-metal-and-dip-mobile{0%{left:3%;top:7%;transform:rotate(-5deg)}55%{left:calc(35% - 36px);top:4%;transform:rotate(0)}100%{left:calc(35% - 36px);top:23%;transform:rotate(0)}}}
+.series em{display:block;margin-top:7px;text-align:center;font-size:11px;font-style:normal;color:#c4deda}.evidence-progress{height:7px;margin-top:10px;border-radius:99px;background:#ffffff25;overflow:hidden}.evidence-progress i{display:block;width:0;height:100%;background:#ffe769;transition:width .4s}.records{max-height:155px;overflow:auto;margin:12px 0;padding:8px;border:1px solid #d7d1c4;border-radius:10px;background:#fffdf8}.records p{margin:0;padding:6px 3px;border-bottom:1px solid #e4dfd5;font-size:11px;line-height:1.45}.records p:last-child{border:0}.records b{color:#087168}.answer-box{padding-top:13px;border-top:1px solid #d7d1c4}.answer-box>b{font-size:12px}.answer-slots{margin:9px 0;padding:9px 5px;border-radius:9px;background:#173f3d;color:#fff6a2;text-align:center;font:900 14px monospace}.answer-choices{display:flex;gap:5px;flex-wrap:wrap}.answer-choices button,.answer-box>button{border:1px solid #9eb1ad;border-radius:8px;background:#fff;padding:6px 8px;font-weight:900;cursor:pointer}.answer-choices button:disabled{opacity:.3}.answer-box>button{margin-top:8px;background:#e0efeb;color:#075f57}.answer-box>button+button{background:#fff}.answer-box>p{min-height:34px;margin:8px 0 0;font-size:11px;font-weight:800;line-height:1.5}
+.comparison-quiz{margin-top:12px;padding:12px;border:2px solid #d0a83a;border-radius:12px;background:#fff9db}.comparison-quiz>b{font-size:12px;color:#795b08}.comparison-quiz p{margin:6px 0 9px;font-size:12px;line-height:1.5}.comparison-quiz div{display:grid;gap:5px}.comparison-quiz button{border:1px solid #b9a45f;border-radius:8px;background:#fff;padding:7px 5px;font:900 12px monospace;cursor:pointer}.comparison-quiz span{display:block;margin-top:7px;font-size:11px;font-weight:800;line-height:1.4}.comparison-quiz.correct{border-color:#3c9a70;background:#e5f5eb}.comparison-quiz.wrong{border-color:#d06a54;background:#fff0e9}
+@media(max-width:980px){main{grid-template-columns:220px minmax(0,1fr)}aside{display:block;grid-column:1/-1;border-left:0;border-top:1px solid var(--line);padding:20px}.records{max-height:220px}.answer-box{max-width:620px}}
+@media(max-width:700px){main{display:block}aside{display:block}.comparison-quiz{scroll-margin-top:12px}}
+.receiving-ion.receiver-one{top:58%}.receiving-ion.receiver-two{top:78%;animation-delay:.12s}.receiving-ion.acid-receiver{background:#facdc5;border-color:#dc6652;color:#8d281b}
+.particle.product-ion{background:#d7dfe4;border-color:#778d99;color:#344d5b}
+.formed-atom.static-deposit{animation:none}
+.formed-atom.static-deposit.new-deposit{animation:new-deposit-settle .85s ease-out both!important}
+@keyframes new-deposit-settle{0%{opacity:0;scale:.35;filter:brightness(1.7)}65%{opacity:1;scale:1.08;filter:brightness(1.25)}100%{opacity:1;scale:1;filter:brightness(1)}}
+.liquid{background-image:linear-gradient(#ffffff38,transparent 45%)!important;transition:background-color 1.5s ease!important}
+.receiving-ion{--start-y:67%;--end-x:28%;--end-y:54%}.receiving-ion.receiver-one{--start-y:58%}.receiving-ion.receiver-two{--start-y:78%;--end-x:41%;--end-y:54%}
+.receiving-ion .ion-face,.receiving-ion .atom-face{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;border-radius:50%}
+.receiving-ion .atom-face{opacity:0;background:#efe8d8;color:#544b3d}
+.transfer .receiving-ion .ion-face{animation:ion-face-out .75s .72s ease-in forwards}
+.transfer .receiving-ion .atom-face{animation:atom-face-in .75s .72s ease-out forwards}
+@keyframes ion-face-out{from{opacity:1;scale:1}to{opacity:0;scale:.55}}
+@keyframes atom-face-in{from{opacity:0;scale:.55}to{opacity:1;scale:1}}
+@keyframes ion-to-electrons{0%{left:var(--start-x,72%);top:var(--start-y);scale:1}72%{left:42%;top:60%;scale:1}100%{left:var(--end-x);top:var(--end-y);opacity:1;scale:1}}
+/* イオンから原子へ：フェードではなく、同じ粒子が反転して変化する */
+.transfer .sequence-electron{animation:electron-join .48s .82s ease-in forwards}
+@keyframes electron-join{0%{scale:1;visibility:visible}85%{scale:.18;visibility:visible}100%{scale:.08;visibility:hidden}}
+.receiving-ion{animation-duration:1.7s;transform-style:preserve-3d}
+.receiving-ion .ion-face,.receiving-ion .atom-face{backface-visibility:hidden;opacity:1}
+.receiving-ion .atom-face{visibility:hidden;transform:rotateY(-90deg);background:#efe8d8;color:#544b3d}
+.transfer .receiving-ion .ion-face{animation:ion-turn-out .34s 1.22s ease-in forwards}
+.transfer .receiving-ion .atom-face{animation:atom-turn-in .34s 1.48s ease-out forwards}
+@keyframes ion-turn-out{0%{transform:rotateY(0);visibility:visible}99%{transform:rotateY(90deg);visibility:visible}100%{transform:rotateY(90deg);visibility:hidden}}
+@keyframes atom-turn-in{0%{transform:rotateY(-90deg);visibility:hidden}1%{transform:rotateY(-90deg);visibility:visible}100%{transform:rotateY(0);visibility:visible}}
+
+/* イオンから変化した直後も、析出後も、同じ原子モデルで表示する */
+.receiving-ion .atom-face{
+  inset:-3px;
+  border:3px solid #8c7f69;
+  border-radius:50%;
+  background:#efe8d8;
+  color:#544b3d;
+  box-shadow:inset 0 0 0 3px #fff9,0 5px 12px #241b1044;
+  font:900 13px monospace;
+}
+.formed-atom,
+.formed-atom.static-deposit{
+  width:54px;
+  height:54px;
+  border:3px solid #8c7f69;
+  border-radius:50%;
+  background:#efe8d8;
+  color:#544b3d;
+  box-shadow:inset 0 0 0 3px #fff9,0 5px 12px #241b1044;
+  font:900 13px monospace;
+}
+
+/* イオンと原子は同じ大きさ。記号だけが素直に切り替わる動きにする */
+.particle,
+.receiving-ion,
+.formed-atom,
+.formed-atom.static-deposit{
+  width:54px;
+  height:54px;
+}
+.receiving-ion{
+  --ion-bg:#bee6e7;
+  --ion-border:#348e95;
+  --ion-color:#175f65;
+  --atom-bg:#efe8d8;
+  --atom-border:#8c7f69;
+  --atom-color:#544b3d;
+  background:var(--ion-bg);
+  border-color:var(--ion-border);
+  color:var(--ion-color);
+  transform-style:flat;
+}
+.receiving-ion.acid-receiver{
+  --ion-bg:#facdc5;
+  --ion-border:#dc6652;
+  --ion-color:#8d281b;
+  --atom-bg:#fff3ef;
+  --atom-border:#d95f4b;
+  --atom-color:#8f2517;
+}
+.receiving-ion .ion-face,
+.receiving-ion .atom-face{
+  inset:0;
+  border:0;
+  box-shadow:none;
+  transform:none;
+  backface-visibility:visible;
+}
+.receiving-ion .atom-face{
+  visibility:hidden;
+  opacity:1;
+}
+.transfer .receiving-ion{
+  animation-name:ion-to-atom-simple;
+  animation-duration:1.7s;
+  animation-timing-function:ease-in-out;
+  animation-fill-mode:forwards;
+}
+.transfer .receiving-ion .ion-face{
+  animation:hide-ion-label 1.7s step-end forwards;
+}
+.transfer .receiving-ion .atom-face{
+  animation:show-atom-label 1.7s step-end forwards;
+}
+@keyframes ion-to-atom-simple{
+  0%{
+    left:var(--start-x,72%);top:var(--start-y);
+    background:var(--ion-bg);border-color:var(--ion-border);color:var(--ion-color);
+  }
+  76%{
+    left:42%;top:60%;
+    background:var(--ion-bg);border-color:var(--ion-border);color:var(--ion-color);
+  }
+  88%{
+    left:var(--end-x);top:var(--end-y);
+    background:var(--ion-bg);border-color:var(--ion-border);color:var(--ion-color);
+    box-shadow:inset 0 0 0 3px #fff9,0 4px 10px #183d3a25;
+  }
+  88.01%,100%{
+    left:var(--end-x);top:var(--end-y);
+    background:var(--atom-bg);border-color:var(--atom-border);color:var(--atom-color);
+    box-shadow:inset 0 0 0 3px #fff9,0 5px 12px #241b1044;
+  }
+}
+@keyframes hide-ion-label{
+  0%,88%{visibility:visible}
+  88.01%,100%{visibility:hidden}
+}
+@keyframes show-atom-label{
+  0%,88%{visibility:hidden}
+  88.01%,100%{visibility:visible}
+}
+
+/* H₂も、直前にできたH原子と同一の原子モデル2個で表す */
+.hydrogen-molecule{
+  position:absolute;
+  inset:0;
+  z-index:16;
+  pointer-events:none;
+  animation:hydrogen-molecule-rise 1.05s ease-out forwards;
+}
+.hydrogen-atom{
+  position:absolute;
+  top:54%;
+  display:grid;
+  place-items:center;
+  width:54px;
+  height:54px;
+  box-sizing:border-box;
+  border:3px solid #8c7f69;
+  border-radius:50%;
+  background:#efe8d8;
+  color:#544b3d;
+  box-shadow:inset 0 0 0 3px #fff9,0 5px 12px #241b1044;
+  transform:translate(-50%,-50%);
+  font:900 13px monospace;
+  font-style:normal;
+}
+.hydrogen-atom.first{left:28%}
+.hydrogen-atom.second{left:41%}
+@keyframes hydrogen-molecule-rise{
+  from{translate:0 0}
+  to{translate:0 -12px}
+}
+
+/* 発生済みのH₂は反応の途中でも消さず、重ならない位置に保持する */
+.hydrogen-molecule{
+  inset:auto;
+  width:13%;
+  height:54px;
+  transform:translate(-50%,-50%);
+  animation:none;
+}
+.hydrogen-molecule .hydrogen-atom{top:50%}
+.hydrogen-molecule .hydrogen-atom.first{left:0}
+.hydrogen-molecule .hydrogen-atom.second{left:100%}
+
+/* ボルタ電池版と同じ、透明感のある水素の気泡 */
+.receiving-ion.acid-receiver .atom-face{
+  background:var(--atom-bg);
+  color:var(--atom-color);
+}
+.hydrogen-bubble{
+  position:absolute;
+  z-index:16;
+  display:grid;
+  place-items:center;
+  width:54px;
+  height:54px;
+  box-sizing:border-box;
+  border:3px solid #fff;
+  border-radius:50%;
+  background:#e9ffffc7;
+  color:#30878a;
+  box-shadow:inset 0 0 0 3px #bce8e866,0 5px 12px #246f7233;
+  transform:translate(-50%,-50%);
+  font:900 13px monospace;
+  animation:hydrogen-bubble-float 2.3s var(--bubble-delay,0s) ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes hydrogen-bubble-float{
+  0%,100%{transform:translate(-50%,-50%) translateY(0)}
+  50%{transform:translate(-50%,-50%) translateY(-9px) scale(1.04)}
+}
+
+/* Match the particle coordinate system to the beaker and reaction layer. */
+#particles{position:absolute;inset:0;pointer-events:none}
+
+/* Gas rises independently of reaction redraws and passes above the beaker rim. */
+#gasLayer{position:absolute;inset:0;z-index:17;pointer-events:none}
+.hydrogen-bubble.escaping-hydrogen{animation:hydrogen-escape 4s linear forwards}
+@keyframes hydrogen-escape{
+  0%{opacity:1;transform:translate(-50%,-50%)}
+  75%{opacity:1}
+  100%{top:-35px;opacity:0;transform:translate(-50%,-50%)}
+}

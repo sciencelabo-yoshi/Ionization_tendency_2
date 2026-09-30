@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>イオン化傾向 反応ラボ</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="visibility.css">
+</head>
+<body>
+  <header><div class="brand"><span>I</span><div><small>CHEMISTRY LAB</small><h1>イオン化傾向 反応ラボ</h1></div></div><button id="resetButton" class="sub-button">↻ はじめから</button></header>
+  <main>
+    <section class="controls">
+      <div class="control-group"><p>1　水溶液を選ぶ</p><div id="solutionChoices" class="choices"></div></div>
+      <div class="control-group"><p>2　金属板を選ぶ</p><div id="metalChoices" class="choices metal-choices"></div></div>
+      <button id="startButton" class="start-button">水溶液に入れる</button>
+      <div class="series"><small>イオンになりやすい</small><b>？ ＞ ？ ＞ ？ ＞ ？ ＞ ？</b><small class="right">イオンになりにくい</small><div class="evidence-progress"><i id="evidenceBar"></i></div><em id="evidenceText">大小関係 0 / 10</em></div>
+    </section>
+    <section class="workspace">
+      <div class="status"><span id="statusDot"></span><div><small>観察</small><p id="message">水溶液と金属板を選びましょう。</p></div></div>
+      <div class="equation" id="equation"><small>化学反応式</small><b>組み合わせを選ぶと表示されます</b><span></span></div>
+      <div class="stage" id="stage">
+        <div class="solution-name" id="solutionName"></div>
+        <div class="beaker"><div class="liquid" id="liquid"></div><div id="particles"></div><div id="products"></div></div>
+        <div class="metal-tool" id="metalTool" aria-label="選択した金属板">
+          <div class="metal-plate" id="metalPlate"><strong id="metalSymbol"></strong><span id="metalName"></span></div>
+        </div>
+        <div class="result-badge hidden" id="resultBadge"></div>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <aside>
+      <small>実験ノート</small><h2>結果から順序を考える</h2>
+      <div class="explanation" id="explanation">組み合わせを変え、反応したかどうかを記録しましょう。</div>
+      <div class="comparison-quiz hidden" id="comparisonQuiz"><b>この実験から考えよう</b><p id="comparisonQuestion"></p><div id="comparisonChoices"></div><span id="comparisonFeedback"></span></div>
+      <div class="records" id="records"><p>まだ実験結果がありません。</p></div>
+      <div class="answer-box"><b>イオンになりやすい順に選ぶ</b><div id="answerSlots" class="answer-slots">？ ＞ ？ ＞ ？ ＞ ？ ＞ ？</div><div id="answerChoices" class="answer-choices"></div><button id="checkAnswer">答え合わせ</button><button id="clearAnswer">並べ直す</button><p id="answerMessage"></p></div>
+      <div class="rule"><b>反応する</b><p>金属板の方がイオンになりやすい</p><b>反応しない</b><p>金属板の方がイオンになりにくい、または同じ金属</p></div>
+    </aside>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
